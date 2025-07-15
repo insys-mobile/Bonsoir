@@ -6,7 +6,7 @@
 import Network
 
 /// The main plugin Swift class.
-@available(iOS 13.0, macOS 10.15, *)
+@available(iOS 12.0, macOS 10.15, *)
 public class SwiftBonsoirPlugin: NSObject, FlutterPlugin {
     /// The package name.
     static let package: String = "fr.skyost.bonsoir"

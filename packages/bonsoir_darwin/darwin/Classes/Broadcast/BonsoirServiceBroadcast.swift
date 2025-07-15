@@ -7,7 +7,7 @@
 import Network
 
 /// Allows to broadcast a given service to the local network.
-@available(iOS 13.0, macOS 10.15, *)
+@available(iOS 12.0, macOS 10.15, *)
 class BonsoirServiceBroadcast: BonsoirAction {
     /// The advertised service.
     private let service: BonsoirService

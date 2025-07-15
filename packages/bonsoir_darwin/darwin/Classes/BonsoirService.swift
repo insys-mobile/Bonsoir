@@ -1,7 +1,7 @@
 import Network
 
 /// Represents a Bonsoir service.
-@available(iOS 13.0, macOS 10.15, *)
+@available(iOS 12.0, macOS 10.15, *)
 class BonsoirService: NSObject {
     /// The response service name.
     var name: String

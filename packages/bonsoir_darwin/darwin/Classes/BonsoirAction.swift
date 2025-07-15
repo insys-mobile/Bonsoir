@@ -9,7 +9,7 @@
 #endif
 
 /// Represents a Bonsoir action (broadcast or discovery).
-@available(iOS 13.0, macOS 10.15, *)
+@available(iOS 12.0, macOS 10.15, *)
 class BonsoirAction: NSObject, FlutterStreamHandler {
     /// The action identifier.
     private let id: Int
