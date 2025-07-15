@@ -56,10 +56,14 @@ public class SwiftBonsoirPlugin: NSObject, FlutterPlugin {
             broadcasts[id]?.dispose()
             result(broadcasts[id] != nil)
         case "discovery.initialize":
-            discoveries[id] = BonsoirServiceDiscovery(id: id, printLogs: arguments["printLogs"] as! Bool, onDispose: {
-                self.discoveries.removeValue(forKey: id)
-            }, messenger: messenger, type: arguments["type"] as! String)
-            result(true)
+            if #available(iOS 13.0, macOS 10.15, *) {
+                discoveries[id] = BonsoirServiceDiscovery(id: id, printLogs: arguments["printLogs"] as! Bool, onDispose: {
+                    self.discoveries.removeValue(forKey: id)
+                }, messenger: messenger, type: arguments["type"] as! String)
+                result(true)
+            } else {
+                result(FlutterMethodNotImplemented)
+            }
         case "discovery.start":
             discoveries[id]?.start()
             result(discoveries[id] != nil)

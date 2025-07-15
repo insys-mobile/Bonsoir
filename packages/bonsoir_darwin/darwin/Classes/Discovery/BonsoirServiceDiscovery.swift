@@ -7,7 +7,7 @@
 import Network
 
 /// Allows to find net services on local network.
-@available(iOS 12.0, macOS 10.15, *)
+@available(iOS 13.0, macOS 10.15, *)
 class BonsoirServiceDiscovery: BonsoirAction {
     /// The type we're listening to.
     private let type: String
