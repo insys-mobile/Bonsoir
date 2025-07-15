@@ -15,7 +15,7 @@ public class SwiftBonsoirPlugin: NSObject, FlutterPlugin {
     var broadcasts: [Int: BonsoirServiceBroadcast] = [:]
 
     /// Contains all created browsers.
-    var discoveries: [Int: BonsoirServiceDiscovery] = [:]
+    var discoveries: [Int: BonsoirAction] = [:]
 
     /// The binary messenger instance.
     let messenger: FlutterBinaryMessenger
@@ -65,11 +65,25 @@ public class SwiftBonsoirPlugin: NSObject, FlutterPlugin {
                 result(FlutterMethodNotImplemented)
             }
         case "discovery.start":
-            discoveries[id]?.start()
-            result(discoveries[id] != nil)
+            if #available(iOS 13.0, macOS 10.15, *) {
+                if let discovery = discoveries[id] as? BonsoirServiceDiscovery {
+                    discovery.start()
+                }
+                result(discoveries[id] != nil)
+            } else {
+                result(FlutterMethodNotImplemented)
+            }
         case "discovery.resolveService":
-            let resolveStarted: Bool = discoveries[id]?.resolveService(name: arguments["name"] as! String, type: arguments["type"] as! String) ?? false
-            result(resolveStarted)
+             if #available(iOS 13.0, macOS 10.15, *) {
+                if let discovery = discoveries[id] as? BonsoirServiceDiscovery {
+                    let resolveStarted: Bool = discovery.resolveService(name: arguments["name"] as! String, type: arguments["type"] as! String) ?? false
+                    result(resolveStarted)
+                } else {
+                    result(false)
+                }
+            } else {
+                result(FlutterMethodNotImplemented)
+            }
         case "discovery.stop":
             discoveries[id]?.dispose()
             result(discoveries[id] != nil)
